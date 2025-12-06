@@ -1,0 +1,12 @@
+Each person from the group has written their use of AI below.
+
+Jakob Bjerre Eriksen:
+Used ChatGPT 5.1 to get information on what an acceptable correlation between variables is when doing hierarchical clustering in the EDA part of the assignment. The answer was that an absolute correlation < 0.5 is "Safe with little redundancy", that 0.5 - 0.7 has "Moderate overlap - usually OK", 0.7 - 0.85 has "High redundancy - consider dropping one", and that > 0.85 is "Too correlated - will distort distances".
+
+Keyla Jaylin Barcenas:
+
+Keval Darshan Amin:
+
+Noa Adriana Gonzalez:
+
+
