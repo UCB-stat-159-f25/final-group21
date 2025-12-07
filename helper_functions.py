@@ -2,8 +2,14 @@ import pandas as pd
 import numpy as np
 import kagglehub
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import StandardScaler
+from tqdm import tqdm
+
 from scipy.cluster.hierarchy import linkage, dendrogram
+
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import mean_squared_error, roc_curve, auc
 
 def get_full_data():
 	"""
@@ -205,5 +211,111 @@ def hierarchical_clustering(data, labels, title):
 	
 	plt.tight_layout()
 	plt.show()
-
+	
 	return None
+
+
+def preprocessor(X_train, categorical_variables):
+    """
+    This function defines the preprocessing necessary for training the models.
+    """
+    
+    # Defining the categorical and numeric variables in the data
+    categorical_variables = categorical_variables
+    numeric_variables = [col for col in X_train.columns if col not in categorical_variables]
+    
+    # Defining the transformers of the categorical (one hot encoding) and numeric variables (none)
+    preprocessor = ColumnTransformer(
+        transformers=[
+            ("num", "passthrough", numeric_variables),
+            ("cat", OneHotEncoder(handle_unknown="ignore", sparse_output=False), categorical_variables)
+        ]
+    )
+    
+    return preprocessor
+
+
+def train_models(model_type, models, preprocessor, X_train, y_train, X_test, y_test):
+    """
+    This functions trains the regression or classification models specified.
+    """
+    
+    # Defining masks for the data used for regression models, filtering out undefined values
+    if model_type == "regression":
+        mask_train = (y_train.notna())
+        mask_test = (y_test.notna())
+
+        X_train = X_train[mask_train]
+        y_train = y_train[mask_train]
+        X_test = X_test[mask_test]
+        y_test = y_test[mask_test]
+    
+    results = {}
+    
+    for name, model in tqdm(models.items(), desc="Training models"):
+        # Defining the pipeline used to preprocess and train the model
+        pipeline = Pipeline(steps=[
+            ("preprocessor", preprocessor),
+            ("model", model)
+        ])
+    
+        # Fitting the model on training data and computing predictions for the test data
+        pipeline.fit(X_train, y_train)
+        y_pred = pipeline.predict(X_test)
+
+        pipeline.fit(X_train, y_train)
+        
+        if model_type == "regression":
+            y_pred = pipeline.predict(X_test)
+            
+            # Computing the RMSE between predictions and actual values on the test data
+            rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+            results[name] = rmse
+        
+        else:
+            y_pred = pipeline.predict_proba(X_test)[:, 1]
+            
+            # Computing ROC AUC metrics for plotting and evaluating
+            fpr, tpr, thresholds = roc_curve(y_test, y_pred)
+            roc_auc = auc(fpr, tpr)
+    
+            # Saving the results
+            results[name] = {
+                "roc_auc": roc_auc,
+                "fpr": fpr,
+                "tpr": tpr,
+                "thresholds": thresholds
+            }
+
+    return results
+
+
+def roc_auc_plot(results_cla):
+    """
+    This function plots a ROC-AUC curve based on the given results.
+    """
+    
+    # Plotting the ROC-AUC
+    plt.figure()
+    
+    for name, metrics in results_cla.items():
+        plt.plot(
+            metrics["fpr"],
+            metrics["tpr"],
+            label=f"{name} (AUC = {metrics['roc_auc']:.3f})"
+        )
+    
+    # Plotting baseline
+    plt.plot([0, 1], [0, 1], linestyle="--", label="Random", color="black")
+    
+    # Names and legend
+    plt.xlabel("FPR")
+    plt.ylabel("TPR")
+    plt.title("ROC Curves")
+    plt.legend()
+    
+    # Show plot
+    plt.tight_layout()
+    plt.show()
+
+    return None
