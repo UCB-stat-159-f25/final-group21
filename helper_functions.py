@@ -184,7 +184,7 @@ def on_time_summary_table(summary_performance, subjects, subjects_column, subjec
     return table
 
 
-def on_time_bar_chart(subjects, summary_performance):
+def on_time_bar_chart(subjects, summary_performance, output_path):
     """
     This function creates a bar chart showing both the on time rate and the average delays
     for each of the subjects.
@@ -197,11 +197,13 @@ def on_time_bar_chart(subjects, summary_performance):
     summary_performance : pandas.DataFrame
         Summary table containing on-time rates and average delay metrics
         for each subject.
+    output_path : str
+        String containing the output path of where the figure should be saved.
 
     Returns
     -------
     None
-        Displays the bar chart and does not return any value.
+        Displays the bar chart and saves it, but does not return any value.
     """
     
     # Showing the ranked subjects in a bar chart
@@ -242,10 +244,12 @@ def on_time_bar_chart(subjects, summary_performance):
     plt.tight_layout()
     plt.show()
 
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+
     return None
 
 
-def plot_corr_matrix(corr_matrix, title):
+def plot_corr_matrix(corr_matrix, title, output_path):
     """
     This function plots an already existing correlation matrix.
 
@@ -255,11 +259,13 @@ def plot_corr_matrix(corr_matrix, title):
         Square correlation matrix containing correlation coefficients.
     title : str
         Title to be displayed above the correlation plot.
+    output_path : str
+        String containing the output path of where the figure should be saved.
 
     Returns
     -------
     None
-        Displays the correlation heatmap and does not return any value.
+        Displays the correlation heatmap and saves it, but does not return any value.
     """
     
     plt.figure(figsize=(10, 8))
@@ -274,6 +280,8 @@ def plot_corr_matrix(corr_matrix, title):
     
     plt.tight_layout()
     plt.show()
+
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
 
     return None
 
@@ -308,7 +316,7 @@ def group_data_clustering(data, groupby, keep_cols):
     return summary
 
 
-def hierarchical_clustering(data, labels, title):
+def hierarchical_clustering(data, labels, title, output_path):
     """
     This function performs hierarchical clustering and plots the corresponding dendrogram.
 
@@ -320,6 +328,8 @@ def hierarchical_clustering(data, labels, title):
         Labels corresponding to each row in data used for dendrogram leaf names.
     title : str
         Title to be displayed above the dendrogram.
+    output_path : str
+        String containing the output path of where the figure should be saved.
 
     Returns
     -------
@@ -343,6 +353,8 @@ def hierarchical_clustering(data, labels, title):
     
     plt.tight_layout()
     plt.show()
+
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
     
     return None
 
@@ -461,7 +473,7 @@ def train_models(model_type, models, preprocessor, X_train, y_train, X_test, y_t
     return results
 
 
-def roc_auc_plot(results_cla):
+def roc_auc_plot(results_cla, output_path):
     """
     This function plots a ROC-AUC curve based on the given results.
 
@@ -469,6 +481,8 @@ def roc_auc_plot(results_cla):
     ----------
     results_cla : dict
         Dictionary containing classification results for each model.
+    output_path : str
+        String containing the output path of where the figure should be saved.
 
     Returns
     -------
@@ -498,6 +512,8 @@ def roc_auc_plot(results_cla):
     # Show plot
     plt.tight_layout()
     plt.show()
+
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
 
     return None
 
