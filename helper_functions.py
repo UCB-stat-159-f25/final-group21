@@ -11,6 +11,8 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.metrics import mean_squared_error, roc_curve, auc
 
+import dataframe_image as dfi
+
 def get_full_data():
     """
     This function extracts the raw data from Kaggle:
@@ -31,7 +33,7 @@ def get_full_data():
     return path
 
 
-def summarize_df(df):
+def summarize_df(df, output_path=None):
     """
     This function creates a summary of a given pandas dataframe.
 
@@ -39,6 +41,8 @@ def summarize_df(df):
     ----------
     df : pandas.DataFrame
         Input dataframe to be summarized.
+    output_path : str
+        String containing the output path of where the figure should be saved.
 
     Returns
     -------
@@ -55,6 +59,13 @@ def summarize_df(df):
         "unique_vals": df.nunique(),
         "missing_pct": df.isna().mean()
     })
+
+    # Specifying column order for dfi to work
+    col_order = ["dtype", "min", "max", "mean", "std", "unique_vals", "missing_pct"]
+    summary = summary[col_order]
+
+    if output_path:
+        dfi.export(summary, output_path, table_conversion="matplotlib")
 
     return summary
 
@@ -148,7 +159,7 @@ def sort_on_time_rate(summary_performance):
     return summary_performance_out
 
 
-def on_time_summary_table(summary_performance, subjects, subjects_column, subjects_column_pretty):
+def on_time_summary_table(summary_performance, subjects, subjects_column_pretty, output_path=None):
     """
     This function creates a summary table containing containing the subjects and each of their metrics.
 
@@ -158,10 +169,10 @@ def on_time_summary_table(summary_performance, subjects, subjects_column, subjec
         Summary table containing reliability metrics for each subject.
     subjects : str
         Column name containing the subjects (e.g., airline or airport).
-    subjects_column : str
-        Original column name in the summary table to be renamed.
     subjects_column_pretty : str
         Pretty-formatted column name used in the output table.
+    output_path : str
+        String containing the output path of where the figure should be saved.
 
     Returns
     -------
@@ -173,7 +184,7 @@ def on_time_summary_table(summary_performance, subjects, subjects_column, subjec
     table = summary_performance[[subjects, "n_flights",
                            "arr_on_time_rate", "dep_on_time_rate",
                            "mean_arr_delay", "mean_dep_delay"]
-                           ].rename(columns={subjects_column: subjects_column_pretty,
+                           ].rename(columns={subjects: subjects_column_pretty,
                                              "n_flights": "Total Flights",
                                              "arr_on_time_rate": "On Time Arrivals (Rate)",
                                              "dep_on_time_rate": "On Time Departures (Rate)",
@@ -181,10 +192,18 @@ def on_time_summary_table(summary_performance, subjects, subjects_column, subjec
                                              "mean_dep_delay": "Average Departure Delay (Minutes)"}
                                    ).reset_index(drop=True)
 
+    # Specifying column order for dfi to work
+    col_order = [subjects_column_pretty, "Total Flights", "On Time Arrivals (Rate)", "On Time Departures (Rate)", 
+                  "Average Arrival Delay (Minutes)", "Average Departure Delay (Minutes)"]
+    table = table[col_order]
+
+    if output_path:
+        dfi.export(table, output_path, table_conversion="matplotlib")
+
     return table
 
 
-def on_time_bar_chart(subjects, summary_performance, output_path):
+def on_time_bar_chart(subjects, summary_performance, output_path=None):
     """
     This function creates a bar chart showing both the on time rate and the average delays
     for each of the subjects.
@@ -244,12 +263,13 @@ def on_time_bar_chart(subjects, summary_performance, output_path):
     plt.tight_layout()
     plt.show()
 
-    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    if output_path:
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
 
     return None
 
 
-def plot_corr_matrix(corr_matrix, title, output_path):
+def plot_corr_matrix(corr_matrix, title, output_path=None):
     """
     This function plots an already existing correlation matrix.
 
@@ -281,7 +301,8 @@ def plot_corr_matrix(corr_matrix, title, output_path):
     plt.tight_layout()
     plt.show()
 
-    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    if output_path:
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
 
     return None
 
@@ -316,7 +337,7 @@ def group_data_clustering(data, groupby, keep_cols):
     return summary
 
 
-def hierarchical_clustering(data, labels, title, output_path):
+def hierarchical_clustering(data, labels, title, output_path=None):
     """
     This function performs hierarchical clustering and plots the corresponding dendrogram.
 
@@ -354,7 +375,8 @@ def hierarchical_clustering(data, labels, title, output_path):
     plt.tight_layout()
     plt.show()
 
-    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    if output_path:
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
     
     return None
 
@@ -473,7 +495,7 @@ def train_models(model_type, models, preprocessor, X_train, y_train, X_test, y_t
     return results
 
 
-def roc_auc_plot(results_cla, output_path):
+def roc_auc_plot(results_cla, output_path=None):
     """
     This function plots a ROC-AUC curve based on the given results.
 
@@ -513,7 +535,8 @@ def roc_auc_plot(results_cla, output_path):
     plt.tight_layout()
     plt.show()
 
-    plt.savefig(output_path, dpi=300, bbox_inches='tight')
+    if output_path:
+        plt.savefig(output_path, dpi=300, bbox_inches='tight')
 
     return None
 
