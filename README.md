@@ -10,14 +10,14 @@ This project analyzes and models flight delay behavior in California using data 
 Because of the many recent flight delays due to the government shutdown, we found it interesting to take a closer look at how delays behave in practice. This motivated us to analyze which airlines and airports perform best and whether delays can be predicted using historical data.
 
 ## Dataset
-The dataset used in this project is the U.S. Flight Delays Dataset @USDOTFlightDelays2015 available on Kaggle:  
+The dataset used in this project is the U.S. Flight Delays Dataset (@USDOTFlightDelays2015), available on Kaggle:  
 https://www.kaggle.com/datasets/usdot/flight-delays  
 
 The data comes from from the Bureau of Transportation Statistics and contains on-time performance records of domestic U.S. flights across 14 airlines and 322 airports during 2015. Due to the large size of the dataset, a subset is used in this project focusing only on flights leaving from California airports.
 
 ## Project Website
 The project's website can be accessed here:  
-INSERT LINK
+https://ucb-stat-159-f25.github.io/final-group21/
 
 ## Repository Structure
 The repository is structured in the following way:  
