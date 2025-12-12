@@ -2,7 +2,7 @@
 version: 1
 project:
   id: e2b2ca8f-65ef-4482-bc37-b575895aae55
-  title: Airline Europe Dataset Analysis
+  title: California Flight Delay Analysis
   bibliography: references.bib
   # description:
   authors: ["Jakob Bjerre Eriksen, Keyla Jaylin Barcenas, Keval Darshan Amin, Noa Adriana Gonzalez"]
