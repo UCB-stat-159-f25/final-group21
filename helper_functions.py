@@ -540,3 +540,26 @@ def roc_auc_plot(results_cla, output_path=None):
 
     return None
 
+
+#Convert HHMM time into hour of day
+"""
+Parameters x: int, float, or str
+Returns: float, hour of day (0-23), or NaN if missing.
+"""
+def hhmm_to_hour(x):
+    if pd.isna(x):
+        return np.nan
+    try:
+        x = int(x)
+    except Exception:
+        return np.nan
+
+    hour = x // 100
+    minute = x % 100
+
+    if hour < 0 or hour > 23 or minute < 0 or minute > 59:
+        return np.nan
+
+    return hour
+
+
