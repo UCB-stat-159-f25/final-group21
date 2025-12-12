@@ -23,5 +23,5 @@ project:
 site:
   template: book-theme
   options:
-    favicon: plane_favicon.png
+    favicon: plane_favicon.ico
   logo: plane.png
