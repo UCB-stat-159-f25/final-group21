@@ -261,10 +261,11 @@ def on_time_bar_chart(subjects, summary_performance, output_path=None):
     ax1.legend(handles1 + handles2, labels1 + labels2, loc="upper right")
     
     plt.tight_layout()
-    plt.show()
 
     if output_path:
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
+
+    plt.show()
 
     return None
 
@@ -299,10 +300,11 @@ def plot_corr_matrix(corr_matrix, title, output_path=None):
     plt.title(title)
     
     plt.tight_layout()
-    plt.show()
 
     if output_path:
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
+
+    plt.show()
 
     return None
 
@@ -373,11 +375,12 @@ def hierarchical_clustering(data, labels, title, output_path=None):
     plt.ylabel("Distance")
     
     plt.tight_layout()
-    plt.show()
 
     if output_path:
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
-    
+
+    plt.show()
+
     return None
 
 
@@ -533,10 +536,11 @@ def roc_auc_plot(results_cla, output_path=None):
     
     # Show plot
     plt.tight_layout()
-    plt.show()
 
     if output_path:
         plt.savefig(output_path, dpi=300, bbox_inches='tight')
+
+    plt.show()
 
     return None
 
