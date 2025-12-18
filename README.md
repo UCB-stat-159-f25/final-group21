@@ -21,7 +21,26 @@ https://ucb-stat-159-f25.github.io/final-group21/
 
 ## Repository Structure
 The repository is structured in the following way:  
-INSERT WHEN DONE (describe what is done in each file/directory, and how to navigate between them)
+- `README.md` : Serves as the main entry point, describing the project purpose, structure, and usage.  
+- `LICENSE` : Defines the legal terms under which the code and data may be used.  
+- `environment.yml` : Specifies the environment and dependencies required to run the project.  
+- `.gitignore` : Specifies files and directories that should not be tracked by Git.  
+- `Makefile` : Provides convenient commands for running common tasks.  
+- `.github/workflows` : Contains GitHub Actions workflows.  
+- `data/` : Stores the datasets used throughout the project.  
+- `helper_functions.py` : Contains utility functions.  
+- `main.ipynb` : Discusses the core parts of the analyses and results.  
+- `get_data.ipynb` : Fetches and preprocesses the raw data used in the analysis.  
+- `airlines_airports.ipynb` : Explores and analyzes delays with respect to different airlines and airports (including clusterings).  
+- `months_days.ipynb` : Explores and analyzes delays with respect to different months, days and hours in the day.  
+- `predictions.ipynb` : Generates predictions for different models determining whether flights are delayed and by how much, and evaluates the different models' performances.  
+- `figures/` : Contains generated figures and tables used in analysis.  
+- `tests/` : Holds tests to verify the correctness of the codebase.  
+- `references.bib` : Contains bibliographic references cited in notebooks or documentation.  
+- `ai_documentation.txt` : Documents how AI tools were used in the making of the project.  
+- `myst.yml` : Configures MyST build settings for the project.  
+- `plane.png` : Image used as the logo on the MyST web page.  
+- `plane_favicon.ico` : Favicon used for the web page.  
 
 ## Setup
 Clone the repository:   
