@@ -7,7 +7,7 @@ https://mybinder.org/v2/git/https%3A%2F%2Fgithub.com%2FUCB-stat-159-f25%2Ffinal-
 This project analyzes and models flight delay behavior in California using data from the U.S. Department of Transportation. The main objectives are to look at airline and airport reliability, explore clustering structures among airlines and airports, and evaluate how well we can predict flight delays using statistical and machine learning methods.
 
 ## Motivation
-Because of the many recent flight delays due to the government shutdown, we found it interesting to take a closer look at how delays behave in practice. This motivated us to analyze which airlines and airports perform best and whether delays can be predicted using historical data.
+Because of the many recent flight delays due to the government shutdown (@shepardson_ljunggren_2025), we found it interesting to take a closer look at how delays behave in practice. This motivated us to analyze which airlines and airports perform best and whether delays can be predicted using historical data.
 
 ## Dataset
 The dataset used in this project is the U.S. Flight Delays Dataset (@USDOTFlightDelays2015), available on Kaggle:  
