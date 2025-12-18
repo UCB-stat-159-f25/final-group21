@@ -35,7 +35,8 @@ The repository is structured in the following way:
 - `months_days.ipynb` : Explores and analyzes delays with respect to different months, days and hours in the day.  
 - `predictions.ipynb` : Generates predictions for different models determining whether flights are delayed and by how much, and evaluates the different models' performances.  
 - `figures/` : Contains generated figures and tables used in analysis.  
-- `tests/` : Holds tests to verify the correctness of the codebase.  
+- `tests/` : Holds tests to verify the correctness of the codebase.
+- `pdf_builds/` : Contains PDF versions of all notebooks in the project.
 - `references.bib` : Contains bibliographic references cited in notebooks or documentation.  
 - `ai_documentation.txt` : Documents how AI tools were used in the making of the project.  
 - `myst.yml` : Configures MyST build settings for the project.  
