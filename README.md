@@ -1,6 +1,6 @@
 # California Flight Delay Analysis
 [![Binder](https://mybinder.org/badge_logo.svg)](
-https://mybinder.org/v2/git/https%3A%2F%2Fgithub.com%2FUCB-stat-159-f25%2Ffinal-group21/HEAD?urlpath=%2Fdoc%2Ftree%2Fmain.ipynb
+https://mybinder.org/v2/gh/UCB-stat-159-f25/final-group21/HEAD?urlpath=doc/tree/main.ipynb
 )
 
 ## Overview
