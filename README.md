@@ -3,6 +3,8 @@
 https://mybinder.org/v2/gh/UCB-stat-159-f25/final-group21/HEAD?urlpath=doc/tree/main.ipynb
 )
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17971075.svg)](https://doi.org/10.5281/zenodo.17971075)
+
 ## Overview
 This project analyzes and models flight delay behavior in California using data from the U.S. Department of Transportation. The main objectives are to look at airline and airport reliability, explore clustering structures among airlines and airports, and evaluate how well we can predict flight delays using statistical and machine learning methods.
 
